@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-Up</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      crossorigin="anonymous"/>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+<form id="form">
+    <div>
+        <div class="title">
+            <h2 >Registration Form</h2>
+        </div>
+        <div>
+            <label for="username">User Name</label>
+            <i class="fas fa-user"></i>
+            <input required type="text" name="username" id="username" placeholder="Name">
+            <!-- <i class="fas fa-exclamation-circle failure-icon"></i>
+            <i class="far fa-check-circle success-icon"></i>
+            <div class="error"></div> -->
+        </div>
+    </div>
+    <div>
+        <div>
+            <label for="email">Email</label>
+            <i class="far fa-envelope"></i>
+            <input  required type="email" name="email" id="email" placeholder="abc@gmail.com">
+            <!-- <i class="fas fa-exclamation-circle failure-icon"></i>
+            <i class="far fa-check-circle success-icon"></i>
+            <div class="error"></div> -->
+        </div>
+    </div>
+    <div>
+        <div>
+            <label for="dob">Date of Bith</label>
+            <i class="fas fa-calendar-alt"></i>
+            <input type="date" required name="dob" id="dob" >
+        </div>
+    </div>
+    <div>
+        <div>
+            <label for="password">Password</label>
+            <i class="fas fa-lock"></i>
+            <input required type="password" name="password" id="password" placeholder="Password here">
+            <!-- <i class="fas fa-exclamation-circle failure-icon"></i>
+            <i class="far fa-check-circle success-icon"></i>
+            <div class="error"></div> -->
+    </div>
+    <div>
+         <div class="checkbox-container">
+              <input type="checkbox" id="agree" class="checkbox">
+              <label for="agree">I agree to the terms and conditions</label>
+        </div>  
+    </div>
+    <button id="btn" type="submit">Submit</button>
+</form>
+
+</div>
+<hr>    
+<div class="entries-section">
+    <div class="mx-auto">
+        <h2 class="text-3xl text-center font-bold">Entries</h2>    
+        <div class="divide-y divide-gray-300/50" id="userEntries"></div>
+    </div>
+</div>
+<script src="index.js"></script>
+</body>
+</html>
