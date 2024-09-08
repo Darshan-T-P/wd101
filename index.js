@@ -6,11 +6,13 @@ document.addEventListener("DOMContentLoaded",()=>{
    const dob=document.getElementById("dob");
    dob.setAttribute("min",mindate);
    dob.setAttribute("max",maxdate);
+   displayEntries();
 });
 
 let userform = document.getElementById("form");
 
 const retrieveEntries = () => {
+
     let entries = localStorage.getItem("userEntries");
 
     if (entries) {
@@ -34,9 +36,9 @@ const displayEntries = () => {
         const emailCell = `<td class='border px-4 py-2'>${entry.email}</td>`;
         const dobCell = `<td class='border px-4 py-2'>${entry.dob}</td>`;
         const passwordCell = `<td class='border px-4 py-2'>${entry.password}</td>`;
-        const acceptTermsCell = `<td class='border px-4 py-2'>${entry.acceptterms ? "Yes" : "No"}</td>`;
+        const acceptTermsCell = `<td class='border px-4 py-2'>${entry.acceptterms}</td>`;
 
-        const row = `<tr>${nameCell} ${emailCell} ${dobCell} ${passwordCell} ${acceptTermsCell}</tr>`;
+        const row = `<tr> ${nameCell} ${emailCell} ${dobCell} ${passwordCell} ${acceptTermsCell}</tr>`;
         return row;
     }).join("\n");
 
@@ -46,7 +48,7 @@ const displayEntries = () => {
       <tr>
         <th class="px-4 py-2">Name</th>
         <th class="px-4 py-2">Email</th>
-        <th class="px-4 py-2">Dob</th>
+        <th class="px-4 py-2">Date of Birth</th>
         <th class="px-4 py-2">Password</th>
         <th class="px-4 py-2">Accepted terms?</th>
       </tr>
@@ -61,11 +63,16 @@ const displayEntries = () => {
 const saveUser = (event) => {
     event.preventDefault();
 
-    const name = document.getElementById("username").value;
+    const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     const dob = document.getElementById("dob").value;
     const acceptterms = document.getElementById("agree").checked;
+
+    if(!validemail){
+        alert("Please enter Valid email address");
+        return;
+    }
 
     if (!validAge()) {
         alert("You must be between 18 and 55 years old.");
@@ -80,6 +87,7 @@ const saveUser = (event) => {
         acceptterms
     };
 
+    let user_Entries = retrieveEntries();
     // Retrieve current entries, add new entry, and save to localStorage
     user_Entries.push(entry);
     localStorage.setItem("userEntries", JSON.stringify(user_Entries));
@@ -88,6 +96,8 @@ const saveUser = (event) => {
 }
 
 // Validate age to ensure the user is between 18 and 55
+// Return true if age is between 18 and 55, false otherwise
+
 const validAge = () => {
     const dobInput = document.getElementById("dob").value;
     if (!dobInput) return false;
@@ -103,9 +113,12 @@ const validAge = () => {
     }
 
     return age >= 18 && age <= 55; 
-    // Return true if age is between 18 and 55, false otherwise
 }
 
+const validemail =()=>{
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+}
 // Add event listener for form submission
 userform.addEventListener("submit", saveUser);
 
